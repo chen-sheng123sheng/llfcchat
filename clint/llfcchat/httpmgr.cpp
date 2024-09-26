@@ -36,7 +36,7 @@ void HttpMgr::PostHttpReq(QUrl url, QJsonObject json, ReqId req_id, Modules mod)
         //无错误则读回请求
         QString res = reply->readAll();
 
-        //发送信号通知完成
+        //发送信号通知 HTTP POST完成
         emit self->sig_http_finish(req_id, res, ErrorCodes::SUCCESS,mod);
         reply->deleteLater();
         return;
@@ -54,6 +54,11 @@ void HttpMgr::slot_http_finish(ReqId id, QString res, ErrorCodes err, Modules mo
     if(mod == Modules::RESETMOD){
         //发送信号通知指定模块http响应结束
         emit sig_reset_mod_finish(id, res, err);
+    }
+
+    if(mod == Modules::LOGINMOD){
+        //发送信号通知指定模块http响应结束
+        emit sig_login_mod_finish(id, res, err);
     }
 }
 
