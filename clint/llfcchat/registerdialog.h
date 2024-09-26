@@ -22,6 +22,8 @@ private slots:
 
     void on_sure_btn_clicked();
 
+    void on_return_btn_clicked();
+
 public slots:
     void slot_reg_mod_finish(ReqId id, QString res, ErrorCodes err);
 
@@ -41,6 +43,9 @@ private:
     QMap<TipErr, QString> _tip_errs;
     QTimer * _countdown_timer;
     int _countdown;
+
+signals:
+    void sigSwitchLogin();
 };
 
 #endif // REGISTERDIALOG_H
